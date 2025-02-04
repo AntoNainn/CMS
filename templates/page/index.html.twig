@@ -1,0 +1,53 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Page index{% endblock %}
+
+{% block body %}
+    <h1>Page index</h1>
+
+    {% for page in pages %}
+    <div class="max-w-sm rounded overflow-hidden shadow-lg">
+        <div class="px-6 py-4">
+            <p>Numero : {{page.id}}</p>
+            <div class="font-bold text-xl mb-2">{{page.titre}}</div>
+        </div>
+        <div class="px-6 pt-4 pb-2">
+            <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2"><a href="{{ path('app_page_show', {'id': page.id}) }}">show</a></span>
+            <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2"><a href="{{ path('app_page_edit', {'id': page.id}) }}">edit</a></span>
+        </div>
+    </div>
+    {% endfor %}
+    {# <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Titre</th>
+                <th>Contenu</th>
+                <th>Meta</th>
+                <th>Url</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for page in pages %}
+            <tr>
+                <td>{{ page.id }}</td>
+                <td>{{ page.titre }}</td>
+                <td>{{ page.contenu }}</td>
+                <td>{{ page.meta }}</td>
+                <td>{{ page.url }}</td>
+                <td>
+                    <a href="{{ path('app_page_show', {'id': page.id}) }}">show</a>
+                    <a href="{{ path('app_page_edit', {'id': page.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table> #}
+
+    <a href="{{ path('app_page_new') }}">Create new</a>
+{% endblock %}
