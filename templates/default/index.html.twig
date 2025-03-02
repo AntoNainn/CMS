@@ -1,21 +1,72 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello DefaultController!{% endblock %}
+{% block title %}Acceuil CMS{% endblock %}
 
-{% block body %}
-{# <style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+{% block header %}
+    <h1 class="flex justify-center text-6xl title-bold m-10">Bienvenue sur ce Super CMS</h1>
+{% endblock %}
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+{% block main %}
+    <div class="flex justify-between">
+        <div class="m-5 w-300">
+            <div class="mb-5">
+                <p class="title-cla text-3xl pb-2" style="color: #FF5252">Gestion complète de vos contenus</p>
+                <p>Notre système vous permet de gérer tous les aspects de votre site de manière efficace : </p>
+            </div>
+            <div class="mb-5">
+                <p class="title-cla text-3xl pb-2" style="color: #FF5252">Une interface simplifiée</p>
+                <p>L'interface d'administration, propulsée par EasyAdmin, offre une gestion centralisée de tous vos contenus. Vous pouvez filtrer, 
+                rechercher et organiser vos informations en quelques clics. Le tout est sécurisé, rapide et conçu pour vous faire gagner du temps.
+                </p>
+            </div>
+        </div>
+        <div class="m-5 w-300">
+            <div class="flex items-start">
+                <i class="fa-solid fa-comments p-2 mr-2 first-bg-color rounded-sm"></i>
+                <div class="pb-2">
+                    <p>Pages dynamiques :</p>
+                    <p>Créez et gérez des pages statiques, personnalisez les URL et optimisez votre SEO avec des outils faciles à utiliser.</p>
+                </div>
+            </div>
+            <div class="flex items-start">
+                <i class="fa-solid fa-comments p-2 mr-2 first-bg-color rounded-sm"></i>
+                <div class="pb-2">
+                    <p>Blog :</p>
+                    <p>Publiez des articles, catégorisez-les, et gérez les commentaires pour offrir une expérience interactive à vos visiteurs.</p>
+                </div>
+            </div>
+            <div class="flex items-start">
+                <i class="fa-solid fa-comments p-2 mr-2 first-bg-color rounded-sm"></i>
+                <div class="pb-2">
+                    <p>Galeries photos :</p>
+                    <p>Ajoutez des images, créez des galeries et personnalisez chaque photo avec des légendes détaillées.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                    <a href="{{ path('app_logout')}}" class="block mt-4 lg:inline-block lg:mt-0 text-base hover:text-white mr-4">
+                        Logout
+                    </a>
+                    <p class="block mt-4 lg:inline-block lg:mt-0 text-base mr-4">
+                        Utilisateur connecté : {{ app.user }}
+                    </p>
+                        {% if is_granted("ROLE_ADMIN") %}
+                            <a href="{{ path('admin_dashboard')}}" class="block mt-4 lg:inline-block lg:mt-0 text-base hover:text-white mr-4">
+                                admin
+                            </a>
+                        {% endif %}
+                    {% else %}
+                    <p>Pour utiliser le CMS il faut vous connectez ou vous creer un compte pour commencer</p>
+                    <a href="{{ path('app_login')}}" class="">
+                        Login
+                    </a>
+                    <a href="{{ path('app_register')}}" class="">
+                        Register
+                    </a>
+                    {% endif %}
+{% endblock %}
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code>C:/Users/csi-web-4/Documents/CMS/src/Controller/DefaultController.php</code></li>
-        <li>Your template at <code>C:/Users/csi-web-4/Documents/CMS/templates/default/index.html.twig</code></li>
-    </ul>
-</div> #}
-<h1 class="text-3xl font-bold underline">Hello world!</h1>
+{% block footer %}
+
 {% endblock %}

@@ -6,71 +6,71 @@
         <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text><text y=%221.3em%22 x=%220.2em%22 font-size=%2276%22 fill=%22%23fff%22>sf</text></svg>">
         {% block stylesheets %}
         {% endblock %}
-
         {% block javascripts %}
             {% block importmap %}
                 {{ importmap('app') }}
             {% endblock %}
-            <script src="https://cdn.tiny.cloud/1/e91ymherrhnkp86ce6t7diomidhb8shg88k1qctyvr4zg4a6/tinymce/7/tinymce.min.js" referrerpolicy="origin"></script>
-            <script>
-                tinymce.init({
-                    selector: 'textarea#page_contenu',
-                    plugins: 'anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount',
-                    toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table | align lineheight | numlist bullist indent outdent | emoticons charmap | removeformat',
-                });
-            </script>
-        {% endblock %}
         <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
+        <script src="https://kit.fontawesome.com/7762946393.js" crossorigin="anonymous"></script>
+        {% endblock %}
     </head>
     <body>
-        <nav class="flex items-center justify-between flex-wrap bg-teal-500 p-6">
-            <div class="flex items-center flex-shrink-0 text-white mr-6">
-                <svg class="fill-current h-8 w-8 mr-2" width="54" height="54" viewBox="0 0 54 54" xmlns="http://www.w3.org/2000/svg"><path d="M13.5 22.1c1.8-7.2 6.3-10.8 13.5-10.8 10.8 0 12.15 8.1 17.55 9.45 3.6.9 6.75-.45 9.45-4.05-1.8 7.2-6.3 10.8-13.5 10.8-10.8 0-12.15-8.1-17.55-9.45-3.6-.9-6.75.45-9.45 4.05zM0 38.3c1.8-7.2 6.3-10.8 13.5-10.8 10.8 0 12.15 8.1 17.55 9.45 3.6.9 6.75-.45 9.45-4.05-1.8 7.2-6.3 10.8-13.5 10.8-10.8 0-12.15-8.1-17.55-9.45-3.6-.9-6.75.45-9.45 4.05z"/></svg>
-                <span class="font-semibold text-xl tracking-tight">CMS</span>
-            </div>
-            <div class="block lg:hidden">
-                <button class="flex items-center px-3 py-2 border rounded text-teal-200 border-teal-400 hover:text-white hover:border-white">
-                <svg class="fill-current h-3 w-3" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>Menu</title><path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z"/></svg>
-                </button>
-            </div>
-            <div class="w-full block flex-grow lg:flex lg:items-center lg:w-auto">
-                <div class="text-sm lg:flex-grow">
-                <a href="{{ path('app_page_index')}}" class="block mt-4 lg:inline-block lg:mt-0 text-base hover:text-white mr-4">
-                    Accueil
-                </a>
-                <a href="{{ path('app_page_index')}}" class="block mt-4 lg:inline-block lg:mt-0 text-base hover:text-white mr-4">
-                    Pages
-                </a>
-                <a href="#responsive-header" class="block mt-4 lg:inline-block lg:mt-0 text-base hover:text-white mr-4">
-                    Article
-                </a>
-                <a href="#responsive-header" class="block mt-4 lg:inline-block lg:mt-0 text-base hover:text-white mr-4">
-                    Galerie
-                </a>
-                {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-                <a href="{{ path('app_logout')}}" class="block mt-4 lg:inline-block lg:mt-0 text-base hover:text-white mr-4">
-                    Logout
-                </a>
-                <p class="block mt-4 lg:inline-block lg:mt-0 text-base mr-4">
-                    Utilisateur connecté : {{ app.user }}
-                </p>
-                    {% if is_granted("ROLE_ADMIN") %}
-                        <a href="{{ path('admin_dashboard')}}" class="block mt-4 lg:inline-block lg:mt-0 text-base hover:text-white mr-4">
-                            admin
-                        </a>
-                    {% endif %}
-                {% else %}
-                <a href="{{ path('app_login')}}" class="block mt-4 lg:inline-block lg:mt-0 text-base hover:text-white mr-4">
-                    Login
-                </a>
-                <a href="{{ path('app_register')}}" class="block mt-4 lg:inline-block lg:mt-0 text-base hover:text-white mr-4">
-                    Register
-                </a>
-                {% endif %}
+        <header>
+            <nav class="flex items-center justify-between flex-wrap first-bg-color p-6">
+                <div class="flex items-center flex-shrink-0 text-white mr-6">
+                    <svg class="fill-current h-8 w-8 mr-2" width="54" height="54" viewBox="0 0 54 54" xmlns="http://www.w3.org/2000/svg"><path d="M13.5 22.1c1.8-7.2 6.3-10.8 13.5-10.8 10.8 0 12.15 8.1 17.55 9.45 3.6.9 6.75-.45 9.45-4.05-1.8 7.2-6.3 10.8-13.5 10.8-10.8 0-12.15-8.1-17.55-9.45-3.6-.9-6.75.45-9.45 4.05zM0 38.3c1.8-7.2 6.3-10.8 13.5-10.8 10.8 0 12.15 8.1 17.55 9.45 3.6.9 6.75-.45 9.45-4.05-1.8 7.2-6.3 10.8-13.5 10.8-10.8 0-12.15-8.1-17.55-9.45-3.6-.9-6.75.45-9.45 4.05z"/></svg>
+                    <span class="font-semibold text-xl tracking-tight">CMS</span>
                 </div>
-            </div>
-        </nav>
-        {% block body %}
+                <div class="block lg:hidden">
+                    <button class="flex items-center px-3 py-2 border rounded text-teal-200 border-teal-400 hover:text-white hover:border-white">
+                    <svg class="fill-current h-3 w-3" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>Menu</title><path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z"/></svg>
+                    </button>
+                </div>
+                <div class="w-full block flex-grow lg:flex lg:items-center lg:w-auto">
+                    <div class="text-sm lg:flex-grow">
+                    <a href="{{ path('app_page_index')}}" class="block mt-4 lg:inline-block lg:mt-0 text-base hover:text-white mr-4">
+                        Accueil
+                    </a>
+                    <a href="{{ path('app_page_index')}}" class="block mt-4 lg:inline-block lg:mt-0 text-base hover:text-white mr-4">
+                        Pages
+                    </a>
+                    <a href="#responsive-header" class="block mt-4 lg:inline-block lg:mt-0 text-base hover:text-white mr-4">
+                        Article
+                    </a>
+                    <a href="#responsive-header" class="block mt-4 lg:inline-block lg:mt-0 text-base hover:text-white mr-4">
+                        Galerie
+                    </a>
+                    {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                    <a href="{{ path('app_logout')}}" class="block mt-4 lg:inline-block lg:mt-0 text-base hover:text-white mr-4">
+                        Logout
+                    </a>
+                    <p class="block mt-4 lg:inline-block lg:mt-0 text-base mr-4">
+                        Utilisateur connecté : {{ app.user }}
+                    </p>
+                        {% if is_granted("ROLE_ADMIN") %}
+                            <a href="{{ path('admin_dashboard')}}" class="block mt-4 lg:inline-block lg:mt-0 text-base hover:text-white mr-4">
+                                admin
+                            </a>
+                        {% endif %}
+                    {% else %}
+                    <a href="{{ path('app_login')}}" class="block mt-4 lg:inline-block lg:mt-0 text-base hover:text-white mr-4">
+                        Login
+                    </a>
+                    <a href="{{ path('app_register')}}" class="block mt-4 lg:inline-block lg:mt-0 text-base hover:text-white mr-4">
+                        Register
+                    </a>
+                    {% endif %}
+                    </div>
+                </div>
+            </nav>
+            {% block header %}
+            {% endblock %}
+        </header>
+        {% block main %}
+
+        {% endblock %}
+        {% block footer %}
+
         {% endblock %}
     </body>
 </html>

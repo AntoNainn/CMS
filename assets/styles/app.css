@@ -1,3 +1,28 @@
+@font-face {
+    font-family: SFBold;
+    src: url('/assets/font/sf/SFPRODISPLAYBOLD.otf');
+}
+
+@font-face {
+    font-family: SF;
+    src: url('/assets/font/sf/SFPRODISPLAYREGULAR.otf');
+}
+
 body {
     background-color: white;
+    /* font-family: 'Open Sans', sans-serif; */
+}
+
+.first-bg-color {
+    background-color: #D32F2F;
+}
+
+.title-bold {
+    font-family: 'SFBold', sans-serif;
+    color: #B71C1C;
+    /* font-style: italic; */
+}
+
+.title-cla{
+    font-family: 'SFBold', sans-serif;
 }
