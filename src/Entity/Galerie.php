@@ -121,4 +121,9 @@ class Galerie
 
         return $this;
     }
+
+    public function __toString(): string
+    {
+        return $this->nom; // Remplace "nom" par le champ correspondant au nom de la galerie
+    }
 }

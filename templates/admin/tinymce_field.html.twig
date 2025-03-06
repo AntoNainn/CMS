@@ -1,8 +1,7 @@
-{# templates/admin/my_dashboard.html.twig #}
-{% extends '@EasyAdmin/layout.html.twig' %}
+{% extends '@EasyAdmin/crud/field/textarea.html.twig' %}
 
-{% block main %}
-    {# ... #}
+{% block input %}
+    <textarea {{ block('widget_attributes') }}>{{ value }}</textarea>
     <script src="https://cdn.tiny.cloud/1/e91ymherrhnkp86ce6t7diomidhb8shg88k1qctyvr4zg4a6/tinymce/7/tinymce.min.js" referrerpolicy="origin"></script>
     <script>
         tinymce.init({
@@ -11,4 +10,4 @@
             toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table | align lineheight | numlist bullist indent outdent | emoticons charmap | removeformat',
         });
     </script>
-{% endblock main %}
+{% endblock %}

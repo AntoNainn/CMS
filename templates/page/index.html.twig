@@ -1,9 +1,9 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Page index{% endblock %}
+{% block title %}Page{% endblock %}
 
-{% block body %}
-    <h1>Page index</h1>
+{% block main %}
+    <h1>Resumer de vos différentes pages :</h1>
 
     {% for page in pages %}
     <div class="max-w-sm rounded overflow-hidden shadow-lg">
@@ -13,7 +13,7 @@
         </div>
         <div class="px-6 pt-4 pb-2">
             <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2"><a href="{{ path('app_page_show', {'id': page.id}) }}">show</a></span>
-            <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2"><a href="{{ path('app_page_edit', {'id': page.id}) }}">edit</a></span>
+            {# <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2"><a href="{{ path('app_page_edit', {'id': page.id}) }}">edit</a></span> #}
         </div>
     </div>
     {% endfor %}

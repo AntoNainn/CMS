@@ -14,6 +14,8 @@ use App\Entity\Galerie;
 use App\Entity\Image;
 use App\Entity\User;
 use App\Entity\Page;
+use EasyCorp\Bundle\EasyAdminBundle\Asset\Asset;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Assets;
 
 #[AdminDashboard(routePath: '/admin', routeName: 'admin')]
 class DashboardController extends AbstractDashboardController
@@ -70,4 +72,11 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToCrud('Page', 'fa fa-newspaper', Page::class);
         // yield MenuItem::linkToCrud('The Label', 'fas fa-list', EntityClass::class);
     }
+
+    public function configureAssets(): Assets
+{
+    return parent::configureAssets()
+        ->addJsFile('https://cdn.tiny.cloud/1/e91ymherrhnkp86ce6t7diomidhb8shg88k1qctyvr4zg4a6/tinymce/7/tinymce.min.js')
+        ->addJsFile('js/tinymce-init.js');
+}
 }

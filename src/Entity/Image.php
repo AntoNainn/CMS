@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\ImageRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 #[ORM\Entity(repositoryClass: ImageRepository::class)]
 class Image
@@ -13,7 +14,7 @@ class Image
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(type: 'text')]
     private ?string $path = null;
 
     #[ORM\Column(length: 255, nullable: true)]
@@ -21,6 +22,20 @@ class Image
 
     #[ORM\ManyToOne(inversedBy: 'images')]
     private ?Galerie $galerie = null;
+
+    private ?UploadedFile $imageFile = null;  // Utilisez UploadedFile au lieu de File
+
+    // Getter et setter pour le champ temporaire
+    public function getImageFile(): ?UploadedFile
+    {
+        return $this->imageFile;
+    }
+
+    public function setImageFile(?UploadedFile $imageFile): self
+    {
+        $this->imageFile = $imageFile;
+        return $this;
+    }
 
     public function getId(): ?int
     {

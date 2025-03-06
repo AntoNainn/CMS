@@ -19,17 +19,27 @@ class GalerieRepository extends ServiceEntityRepository
     //    /**
     //     * @return Galerie[] Returns an array of Galerie objects
     //     */
-    //    public function findByExampleField($value): array
-    //    {
-    //        return $this->createQueryBuilder('g')
-    //            ->andWhere('g.exampleField = :val')
-    //            ->setParameter('val', $value)
-    //            ->orderBy('g.id', 'ASC')
-    //            ->setMaxResults(10)
-    //            ->getQuery()
-    //            ->getResult()
-    //        ;
-    //    }
+       public function findByUserLogin($User): array
+       {
+           return $this->createQueryBuilder('g')
+               ->andWhere('g.user = :val')
+               ->setParameter('val', $User)
+               ->orderBy('g.id', 'ASC')
+               ->getQuery()
+               ->getResult()
+           ;
+       }
+
+       public function findByPageId($page): array
+       {
+           return $this->createQueryBuilder('g')
+               ->andWhere('g.page = :val')
+               ->setParameter('val', $page)
+               ->orderBy('g.id', 'ASC')
+               ->getQuery()
+               ->getResult()
+           ;
+       }
 
     //    public function findOneBySomeField($value): ?Galerie
     //    {

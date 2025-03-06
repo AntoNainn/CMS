@@ -10,6 +10,14 @@
             {% block importmap %}
                 {{ importmap('app') }}
             {% endblock %}
+        <script src="https://cdn.tiny.cloud/1/e91ymherrhnkp86ce6t7diomidhb8shg88k1qctyvr4zg4a6/tinymce/7/tinymce.min.js" referrerpolicy="origin"></script>
+        <script>
+            tinymce.init({
+                selector: 'textarea',
+                plugins: 'anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount',
+                toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table | align lineheight | numlist bullist indent outdent | emoticons charmap | removeformat',
+            });
+        </script>
         <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
         <script src="https://kit.fontawesome.com/7762946393.js" crossorigin="anonymous"></script>
         {% endblock %}
@@ -28,18 +36,18 @@
                 </div>
                 <div class="w-full block flex-grow lg:flex lg:items-center lg:w-auto">
                     <div class="text-sm lg:flex-grow">
-                    <a href="{{ path('app_page_index')}}" class="block mt-4 lg:inline-block lg:mt-0 text-base hover:text-white mr-4">
+                    <a href="{{ path('app_default')}}" class="block mt-4 lg:inline-block lg:mt-0 text-base hover:text-white mr-4">
                         Accueil
                     </a>
                     <a href="{{ path('app_page_index')}}" class="block mt-4 lg:inline-block lg:mt-0 text-base hover:text-white mr-4">
                         Pages
                     </a>
-                    <a href="#responsive-header" class="block mt-4 lg:inline-block lg:mt-0 text-base hover:text-white mr-4">
+                    {# <a href="#responsive-header" class="block mt-4 lg:inline-block lg:mt-0 text-base hover:text-white mr-4">
                         Article
                     </a>
                     <a href="#responsive-header" class="block mt-4 lg:inline-block lg:mt-0 text-base hover:text-white mr-4">
                         Galerie
-                    </a>
+                    </a> #}
                     {% if is_granted('IS_AUTHENTICATED_FULLY') %}
                     <a href="{{ path('app_logout')}}" class="block mt-4 lg:inline-block lg:mt-0 text-base hover:text-white mr-4">
                         Logout
