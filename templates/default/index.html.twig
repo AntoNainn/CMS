@@ -45,26 +45,26 @@
         </div>
     </div>
     {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-                    <a href="{{ path('app_logout')}}" class="block mt-4 lg:inline-block lg:mt-0 text-base hover:text-white mr-4">
-                        Logout
-                    </a>
-                    <p class="block mt-4 lg:inline-block lg:mt-0 text-base mr-4">
-                        Utilisateur connecté : {{ app.user }}
-                    </p>
-                        {% if is_granted("ROLE_ADMIN") %}
-                            <a href="{{ path('admin_dashboard')}}" class="block mt-4 lg:inline-block lg:mt-0 text-base hover:text-white mr-4">
-                                admin
-                            </a>
-                        {% endif %}
-                    {% else %}
-                    <p>Pour utiliser le CMS il faut vous connectez ou vous creer un compte pour commencer</p>
-                    <a href="{{ path('app_login')}}" class="">
-                        Login
-                    </a>
-                    <a href="{{ path('app_register')}}" class="">
-                        Register
-                    </a>
-                    {% endif %}
+        <a href="{{ path('app_logout')}}" class="block mt-4 lg:inline-block lg:mt-0 text-base hover:text-white mr-4">
+            Logout
+        </a>
+        <p class="block mt-4 lg:inline-block lg:mt-0 text-base mr-4">
+            Utilisateur connecté : {{ app.user }}
+        </p>
+            {% if is_granted("ROLE_ADMIN") %}
+                <a href="{{ path('admin_dashboard')}}" class="block mt-4 lg:inline-block lg:mt-0 text-base hover:text-white mr-4">
+                    admin
+                </a>
+            {% endif %}
+        {% else %}
+        <p>Pour utiliser le CMS il faut vous connectez ou vous creer un compte pour commencer</p>
+        <a href="{{ path('app_login')}}" class="">
+            Login
+        </a>
+        <a href="{{ path('app_register')}}" class="">
+            Register
+        </a>
+    {% endif %}
 {% endblock %}
 
 {% block footer %}

@@ -1,63 +1,57 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="UTF-8">
-        <title>{% block title %}Page{% endblock %}</title>
-        <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text><text y=%221.3em%22 x=%220.2em%22 font-size=%2276%22 fill=%22%23fff%22>sf</text></svg>">
-        {% block stylesheets %}
-        {% endblock %}
+{% extends 'base.html.twig' %}
 
-        {% block javascripts %}
-            {% block importmap %}{{ importmap('app') }}{% endblock %}
-        {% endblock %}
-        <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
-    </head>
-    <body>
-        <header>
-            <nav class="flex items-center justify-between flex-wrap bg-teal-500 p-6">
-                <div class="flex items-center flex-shrink-0 text-white mr-6">
-                    <svg class="fill-current h-8 w-8 mr-2" width="54" height="54" viewBox="0 0 54 54" xmlns="http://www.w3.org/2000/svg"><path d="M13.5 22.1c1.8-7.2 6.3-10.8 13.5-10.8 10.8 0 12.15 8.1 17.55 9.45 3.6.9 6.75-.45 9.45-4.05-1.8 7.2-6.3 10.8-13.5 10.8-10.8 0-12.15-8.1-17.55-9.45-3.6-.9-6.75.45-9.45 4.05zM0 38.3c1.8-7.2 6.3-10.8 13.5-10.8 10.8 0 12.15 8.1 17.55 9.45 3.6.9 6.75-.45 9.45-4.05-1.8 7.2-6.3 10.8-13.5 10.8-10.8 0-12.15-8.1-17.55-9.45-3.6-.9-6.75.45-9.45 4.05z"/></svg>
-                    <span class="font-semibold text-xl tracking-tight">CMD</span>
-                </div>
-                <div class="block lg:hidden">
-                    <button class="flex items-center px-3 py-2 border rounded text-teal-200 border-teal-400 hover:text-white hover:border-white">
-                    <svg class="fill-current h-3 w-3" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>Menu</title><path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z"/></svg>
-                    </button>
-                </div>
-                <div class="w-full block flex-grow lg:flex lg:items-center lg:w-auto">
-                    <div class="text-sm lg:flex-grow">
-                        <a href="{{ path('app_page_index')}}" class="block mt-4 lg:inline-block lg:mt-0 text-base hover:text-white mr-4">
-                            Accueil
-                        </a>
-                        <a href="{{ path('app_page_index')}}" class="block mt-4 lg:inline-block lg:mt-0 text-base hover:text-white mr-4">
-                            Pages
-                        </a>
-                        <a href="#responsive-header" class="block mt-4 lg:inline-block lg:mt-0 text-base hover:text-white mr-4">
-                            Article
-                        </a>
-                        <a href="#responsive-header" class="block mt-4 lg:inline-block lg:mt-0 text-base hover:text-white mr-4">
-                            Galerie
-                        </a>
-                    </div>
-                </div>
-            </nav>
-            <h1 class="text-5xl text-center">{{ page.titre }}</h1>
-        </header>
-        <div class="m-12">{{page.contenu|raw}}</div>
-        <h3>Galerie photo :</h3>
-        <div class="flex">
-        {% if page.galerie is not null and page.galerie.images is not null %}
-            {% for image in page.galerie.images %}
-                <div class="max-w-sm rounded overflow-hidden shadow-lg mr-8">
-                    <img class="w-full" src="data:image/jpeg;base64, {{ image.path }}" alt="Sunset in the mountains">
-                    <div class="px-6 py-4">
-                        <p class="text-gray-700 text-base">
-                        {{ image.legende }}
-                        </p>
-                    </div>
-                </div>
-            {% endfor %}
-        {% endif %}
+{% block title %}Page{% endblock %}
+
+{% block header %}
+    <p style="border-bottom: 2px solid black">Votre page :</p>
+    <nav class="flex items-center justify-between flex-wrap bg-teal-500 p-6">
+        <div class="flex items-center flex-shrink-0 text-white mr-6">
+            <svg class="fill-current h-8 w-8 mr-2" width="54" height="54" viewBox="0 0 54 54" xmlns="http://www.w3.org/2000/svg"><path d="M13.5 22.1c1.8-7.2 6.3-10.8 13.5-10.8 10.8 0 12.15 8.1 17.55 9.45 3.6.9 6.75-.45 9.45-4.05-1.8 7.2-6.3 10.8-13.5 10.8-10.8 0-12.15-8.1-17.55-9.45-3.6-.9-6.75.45-9.45 4.05zM0 38.3c1.8-7.2 6.3-10.8 13.5-10.8 10.8 0 12.15 8.1 17.55 9.45 3.6.9 6.75-.45 9.45-4.05-1.8 7.2-6.3 10.8-13.5 10.8-10.8 0-12.15-8.1-17.55-9.45-3.6-.9-6.75.45-9.45 4.05z"/></svg>
+            {# <img src="/assets/logoCMS2.png" alt="logo" width="75"> #}
+            <span class="font-semibold text-xl tracking-tight">CMS</span>
         </div>
-    </body>
-</html>
+        <div class="block lg:hidden">
+            <button class="flex items-center px-3 py-2 border rounded text-teal-200 border-teal-400 hover:text-white hover:border-white">
+            <svg class="fill-current h-3 w-3" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>Menu</title><path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z"/></svg>
+            </button>
+        </div>
+        <div class="w-full block flex-grow lg:flex lg:items-center lg:w-auto">
+            <div class="text-sm lg:flex-grow">
+                <a href="{{ path('app_page_show',{'id': page.id }) }}" class="block mt-4 lg:inline-block lg:mt-0 text-base hover:text-white mr-4">
+                    Page principale
+                </a>
+                <a href="{{ path('app_page_index')}}" class="block mt-4 lg:inline-block lg:mt-0 text-base hover:text-white mr-4">
+                    Blog
+                </a>
+            </div>
+        </div>
+    </nav>
+    <h1 class="flex justify-center text-6xl title-bold m-10">{{ page.titre }}</h1>
+{% endblock %}
+
+{% block main %}
+    <div class="m-12">
+            <div>
+                {{page.contenu|raw}}
+            </div>
+            <h3>Galerie photo :</h3>
+            <div class="flex">
+                {% if page.galerie is not null and page.galerie.images is not null %}
+                    {% for image in page.galerie.images %}
+                        <div class="max-w-sm rounded overflow-hidden shadow-lg mr-8">
+                            <img class="w-full" src="data:image/jpeg;base64, {{ image.path }}" alt="Sunset in the mountains">
+                            <div class="px-6 py-4">
+                                <p class="text-gray-700 text-base">
+                                {{ image.legende }}
+                                </p>
+                            </div>
+                        </div>
+                    {% endfor %}
+                {% endif %}
+            </div>
+        </div>
+{% endblock %}
+
+{% block footer %}
+
+{% endblock %}

@@ -70,6 +70,7 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToCrud('Galeries', 'fa fa-newspaper', Galerie::class);
         yield MenuItem::linkToCrud('Image', 'fa fa-newspaper', Image::class);
         yield MenuItem::linkToCrud('Page', 'fa fa-newspaper', Page::class);
+        yield MenuItem::linkToUrl('Accueil CMS', 'fa fa-globe', '/');
         // yield MenuItem::linkToCrud('The Label', 'fas fa-list', EntityClass::class);
     }
 

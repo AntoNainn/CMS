@@ -2,38 +2,31 @@
 
 {% block title %}Article index{% endblock %}
 
-{% block body %}
-    <h1>Article index</h1>
-
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Titre</th>
-                <th>Description</th>
-                <th>Date_creation</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for article in articles %}
-            <tr>
-                <td>{{ article.id }}</td>
-                <td>{{ article.titre }}</td>
-                <td>{{ article.description }}</td>
-                <td>{{ article.dateCreation ? article.dateCreation|date('Y-m-d H:i:s') : '' }}</td>
-                <td>
-                    <a href="{{ path('app_article_show', {'id': article.id}) }}">show</a>
-                    <a href="{{ path('app_article_edit', {'id': article.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="5">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
-
-    <a href="{{ path('app_article_new') }}">Create new</a>
+{% block main %}
+    <h1 class="mb-4">Blog :</h1>
+    <a class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" href="{{ path('app_article_new') }}">Ajouter un article</a>
+    {% for article in articles %}
+        <div class="m-4">
+            <div class="max-w-lg rounded overflow-hidden shadow-lg">
+                <div class="px-6 py-4">
+                    <div class="font-bold text-xl mb-2">{{ article.titre }}</div>
+                    <div class="text-gray-700 text-base">
+                        {{ article.description|raw }}
+                    </div>
+                </div>
+                <div class="px-6 pt-4 pb-2">
+                    <div class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">
+                        <span>Écrit par : {{ article.user }} </span>
+                        <span> publié le : {{ article.dateCreation ? article.dateCreation|date('Y-m-d H:i:s') : '' }} </span>
+                    </div>
+                    <div class="mt-2 mb-2">
+                        <a class="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded" href="{{ path('app_article_show', {'id': article.id}) }}">Ajouter un commentaire</a>
+                        <a class="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded" href="{{ path('app_article_edit', {'id': article.id}) }}">Voir tout les commentaire</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% else %}
+        <p colspan="5">no records found</p>
+    {% endfor %}
 {% endblock %}
