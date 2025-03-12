@@ -14,6 +14,7 @@ use App\Entity\Galerie;
 use App\Entity\Image;
 use App\Entity\User;
 use App\Entity\Page;
+use App\Entity\Commentaire;
 use EasyCorp\Bundle\EasyAdminBundle\Asset\Asset;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Assets;
 
@@ -66,6 +67,7 @@ class DashboardController extends AbstractDashboardController
     {
         yield MenuItem::linkToDashboard('Dashboard', 'fa fa-home');
         yield MenuItem::linkToCrud('Articles', 'fa fa-newspaper', Article::class);
+        yield MenuItem::linkToCrud('Page', 'fa fa-newspaper', Commentaire::class);
         yield MenuItem::linkToCrud('Users', 'fa fa-newspaper', User::class);
         yield MenuItem::linkToCrud('Galeries', 'fa fa-newspaper', Galerie::class);
         yield MenuItem::linkToCrud('Image', 'fa fa-newspaper', Image::class);
