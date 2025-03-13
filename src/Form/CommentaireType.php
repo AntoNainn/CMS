@@ -19,10 +19,10 @@ class CommentaireType extends AbstractType
                 'widget' => 'single_text',
             ])
             ->add('statut')
-            ->add('article', EntityType::class, [
-                'class' => Article::class,
-                'choice_label' => 'id',
-            ])
+            // ->add('article', EntityType::class, [
+            //     'class' => Article::class,
+            //     'choice_label' => 'id',
+            // ])
         ;
     }
 

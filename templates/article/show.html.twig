@@ -2,33 +2,50 @@
 
 {% block title %}Article{% endblock %}
 
-{% block body %}
-    <h1>Article</h1>
-
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ article.id }}</td>
-            </tr>
-            <tr>
-                <th>Titre</th>
-                <td>{{ article.titre }}</td>
-            </tr>
-            <tr>
-                <th>Description</th>
-                <td>{{ article.description }}</td>
-            </tr>
-            <tr>
-                <th>Date_creation</th>
-                <td>{{ article.dateCreation ? article.dateCreation|date('Y-m-d H:i:s') : '' }}</td>
-            </tr>
-        </tbody>
-    </table>
+{% block main %}
+    <div class=" rounded overflow-hidden shadow-lg">
+        <div class="px-6 py-4">
+            <div class="font-bold text-xl mb-2">{{ article.titre }}</div>
+            <div class="text-gray-700 text-base">
+                {{ article.description|raw }}
+            </div>
+        </div>
+        <div class="px-6 pt-4 pb-2">
+            <div class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">
+                <span>Écrit par : {{ article.user }} </span>
+                <span> Publié le : {{ article.dateCreation ? article.dateCreation|date('Y-m-d H:i:s') : '' }} </span>
+            </div>
+            <div class="mt-2 mb-2">
+                {# <a class="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded" href="{{ path('app_commentaire_new', {'id': article.id}) }}">Ajouter un commentaire</a> #}
+                <a class="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded" href="{{ path('app_commentaire_new', {'id': article.id}) }}">Ajouter un commentaire</a>
+            </div>
+        </div>
+    </div>
+    <h3>Commentaire :</h3>
+    <div>
+        {% for com in article.commentaires %}
+        <div class="rounded overflow-hidden">
+            <div class="px-6 py-4">
+                <div class="flex items-center">
+                    <img src="{{ asset('image/avatar.png') }}" alt="logo" width="50px">
+                    <p>{{ com.user }} {{ com.dateCreation ? com.dateCreation|date('Y-m-d H:i:s') : '' }}</p>
+                </div>
+                <div class="text-gray-700 text-base">
+                    {{ com.contenu|raw }}
+                </div>
+            </div>
+            <div class="px-6 pb-2">
+                <div class="mt-2 mb-2">
+                    {# <a class="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white px-4 border border-blue-500 hover:border-transparent rounded" href="{{ path('app_commentaire_new', {'id': article.id}) }}">Repondre</a> #}
+                </div>
+            </div>
+        </div>
+        {% else %}
+            <p>pas de commentaire pour cet article</p>
+        {% endfor %}
+    </div>
 
     <a href="{{ path('app_article_index') }}">back to list</a>
 
-    <a href="{{ path('app_article_edit', {'id': article.id}) }}">edit</a>
-
-    {{ include('article/_delete_form.html.twig') }}
+    {# {{ include('article/_delete_form.html.twig') }} #}
 {% endblock %}

@@ -11,6 +11,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Bundle\SecurityBundle\Security;
+use App\Repository\ArticleRepository;
 
 #[Route('/commentaire')]
 final class CommentaireController extends AbstractController
@@ -24,20 +25,24 @@ final class CommentaireController extends AbstractController
     }
 
     #[Route('/new', name: 'app_commentaire_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, EntityManagerInterface $entityManager, Security $security): Response
+    public function new(Request $request, EntityManagerInterface $entityManager, Security $security, ArticleRepository $articleRepository): Response
     {
         $commentaire = new Commentaire();
         $form = $this->createForm(CommentaireType::class, $commentaire);
         $form->handleRequest($request);
 
+        $id = $request->query->get('id');
+        $article = $articleRepository->findOneById($id);
+
         if ($form->isSubmitted() && $form->isValid()) {
             $user = $security->getUser();
             $commentaire->setUser($user);
+            $commentaire->setArticle($article);
 
             $entityManager->persist($commentaire);
             $entityManager->flush();
 
-            return $this->redirectToRoute('app_commentaire_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_article_show', ['id' => $id], Response::HTTP_SEE_OTHER);
         }
 
         return $this->render('commentaire/new.html.twig', [

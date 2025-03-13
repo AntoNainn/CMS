@@ -53,7 +53,7 @@ final class PageController extends AbstractController
     {
         return $this->render('page/template.html.twig', [
             'page' => $page,
-            'galerie' => $page->getGalerie(),
+            //'galerie' => Appel repo ,
         ]);
     }
 
