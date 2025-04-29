@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\PageRepository;
+use Symfony\Component\String\Slugger\SluggerInterface;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -107,6 +108,12 @@ class Page
     {
         $this->galerie = $galerie;
 
+        return $this;
+    }
+
+    public function setSlug(string $url, SluggerInterface $slugger): self
+    {
+        $this->url = strtolower($slugger->slug($url));
         return $this;
     }
 }

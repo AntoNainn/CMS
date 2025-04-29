@@ -18,7 +18,6 @@ class CommentaireType extends AbstractType
             ->add('dateCreation', null, [
                 'widget' => 'single_text',
             ])
-            ->add('statut')
             // ->add('article', EntityType::class, [
             //     'class' => Article::class,
             //     'choice_label' => 'id',

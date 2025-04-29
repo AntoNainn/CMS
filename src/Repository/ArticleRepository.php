@@ -19,17 +19,17 @@ class ArticleRepository extends ServiceEntityRepository
     //    /**
     //     * @return Article[] Returns an array of Article objects
     //     */
-    //    public function findById($value): array
-    //    {
-    //        return $this->createQueryBuilder('a')
-    //            ->andWhere('a.id = :val')
-    //            ->setParameter('val', $value)
-    //            ->orderBy('a.id', 'ASC')
-    //            ->setMaxResults(10)
-    //            ->getQuery()
-    //            ->getResult()
-    //        ;
-    //    }
+    public function findVisibleArticles(int $userId): array
+    {
+        return $this->createQueryBuilder('a')
+        ->join('a.commentaires', 'c')  // Joindre la table Commentaire
+        ->andWhere('c.statut = :statut')  // Filtrer les commentaires actifs
+        ->setParameter('statut', true)
+        ->andWhere('c.user_id != :userId') // Exclure les commentaires appartenant à l'utilisateur donné
+        ->setParameter('userId', $userId)
+        ->getQuery()
+        ->getResult();
+    }
 
        public function findOneById($value): ?Article
        {

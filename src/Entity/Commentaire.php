@@ -22,8 +22,8 @@ class Commentaire
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private ?\DateTimeInterface $dateCreation = null;
 
-    #[ORM\Column(length: 255, nullable: true)]
-    private ?string $statut = null;
+    #[ORM\Column(type: 'boolean', nullable: true)]
+    private ?bool $statut = null;
 
     #[ORM\ManyToOne(inversedBy: 'commentaires')]
     #[ORM\JoinColumn(nullable: false)]
@@ -62,12 +62,12 @@ class Commentaire
         return $this;
     }
 
-    public function getStatut(): ?string
+    public function getStatut(): ?bool
     {
         return $this->statut;
     }
 
-    public function setStatut(?string $statut): static
+    public function setStatut(?bool $statut): static
     {
         $this->statut = $statut;
 

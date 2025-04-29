@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Article;
+use App\Entity\User;
 use App\Form\ArticleType;
 use App\Repository\ArticleRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -10,6 +11,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use App\Repository\CommentaireRepository;
+use Symfony\Bundle\SecurityBundle\Security;
 
 #[Route('/article')]
 final class ArticleController extends AbstractController
@@ -48,10 +51,18 @@ final class ArticleController extends AbstractController
     }
 
     #[Route('/{id}', name: 'app_article_show', methods: ['GET'])]
-    public function show(Article $article): Response
+    public function show(Article $article, CommentaireRepository $commentaireRepository, Security $security): Response
     {
+        $user = $security->getUser();
+        if($user->getRoles() == "ROLE_ADMIN"){
+            $comments = $commentaireRepository->findAll();
+        }else{
+            $comments = $commentaireRepository->findByIdArticle($article->getId());
+        }
+
         return $this->render('article/show.html.twig', [
             'article' => $article,
+            'coms' => $comments,
         ]);
     }
 

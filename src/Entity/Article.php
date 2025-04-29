@@ -153,4 +153,9 @@ class Article
         $extrait = $extrait . "...";
         return $extrait;
     }
+
+    public function __toString(): string
+    {
+        return $this->id;
+    }
 }

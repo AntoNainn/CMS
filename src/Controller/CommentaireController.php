@@ -36,6 +36,11 @@ final class CommentaireController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $user = $security->getUser();
+            if($user->getRoles() == "ROLE_UTILISATEUR" || $user->getRoles() == "ROLE_REDACTEUR"){
+                $commentaire->setStatut(FALSE);
+            }else{
+                $commentaire->setStatut(TRUE);
+            }
             $commentaire->setUser($user);
             $commentaire->setArticle($article);
 

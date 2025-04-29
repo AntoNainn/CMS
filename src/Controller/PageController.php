@@ -11,15 +11,21 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Bundle\SecurityBundle\Security;
+use Symfony\Component\String\Slugger\SluggerInterface;
 
 #[Route('/page')]
 final class PageController extends AbstractController
 {
     #[Route(name: 'app_page_index', methods: ['GET'])]
-    public function index(PageRepository $pageRepository): Response
+    public function index(PageRepository $pageRepository, SluggerInterface $slugger, EntityManagerInterface $entityManager): Response
     {
+        $pages = $pageRepository->findAll();
+        foreach($pages as $page){
+            $page->setSlug($page->getUrl(), $slugger);
+            $entityManager->flush();
+        }
         return $this->render('page/index.html.twig', [
-            'pages' => $pageRepository->findAll(),
+            'pages' => $pages,
         ]);
     }
 
@@ -32,8 +38,6 @@ final class PageController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $user = $security->getUser();
-            dump($user);
-            die();
             $page->setUser($user);
 
             $entityManager->persist($page);
@@ -48,12 +52,14 @@ final class PageController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'app_page_show', methods: ['GET'])]
-    public function show(Page $page): Response
+    #[Route('/{url}', name: 'app_page_show', methods: ['GET'])]
+    public function show(PageRepository $pageRepository, string $url): Response
     {
+        $page = $pageRepository->findOneByUrl($url);
+
         return $this->render('page/template.html.twig', [
             'page' => $page,
-            //'galerie' => Appel repo ,
+            'galerie' => $page->getGalerie(),
         ]);
     }
 
