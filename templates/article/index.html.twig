@@ -4,7 +4,9 @@
 
 {% block main %}
     <h1 class="mb-4">Blog :</h1>
-    <a class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded shadow-lg" href="{{ path('app_article_new') }}">Ajouter un article</a>
+    {% if is_granted("ROLE_ADMIN") or  is_granted("ROLE_REDACTEUR") %}
+        <a class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded shadow-lg" href="{{ path('app_article_new') }}">Ajouter un article</a>
+    {% endif %}
     <div class=" grid grid-cols-3 gap-1">
         {% for article in articles %}
             <div class="mt-2">

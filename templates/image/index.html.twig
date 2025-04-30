@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Image index{% endblock %}
+
+{% block main %}
+    <h1>Image index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>image</th>
+                <th>Legende</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for image in images %}
+            <tr>
+                <td>{{ image.id }}</td>
+                <td><img src="data:image/jpeg;base64,{{ image.path }}" alt="Image" style="max-width: 300px;"></td>
+                <td>{{ image.legende }}</td>
+                <td>
+                    <a href="{{ path('app_image_edit', {'id': image.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_image_new') }}">Create new</a>
+{% endblock %}

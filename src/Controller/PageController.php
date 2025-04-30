@@ -21,8 +21,10 @@ final class PageController extends AbstractController
     {
         $pages = $pageRepository->findAll();
         foreach($pages as $page){
-            $page->setSlug($page->getUrl(), $slugger);
-            $entityManager->flush();
+            if($page->getUrl() != null){
+                $page->setSlug($page->getUrl(), $slugger);
+                $entityManager->flush();
+            }
         }
         return $this->render('page/index.html.twig', [
             'pages' => $pages,
@@ -55,17 +57,33 @@ final class PageController extends AbstractController
     #[Route('/{url}', name: 'app_page_show', methods: ['GET'])]
     public function show(PageRepository $pageRepository, string $url): Response
     {
-        $page = $pageRepository->findOneByUrl($url);
+        if(is_numeric($url)){
+            $page = $pageRepository->find((int)$url);
+        }else{
+            $page = $pageRepository->findOneByUrl($url);
+        }
+
+        if ($page->getGalerie() !== null) {
+            $galerie = $page->getGalerie();
+        } else {
+            $galerie = null;
+        }
 
         return $this->render('page/template.html.twig', [
             'page' => $page,
-            'galerie' => $page->getGalerie(),
+            'galerie' => $galerie,
         ]);
     }
 
-    #[Route('/{id}/edit', name: 'app_page_edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, Page $page, EntityManagerInterface $entityManager): Response
+    #[Route('/{url}/edit', name: 'app_page_edit', methods: ['GET', 'POST'])]
+    public function edit(Request $request, string $url, EntityManagerInterface $entityManager, PageRepository $pageRepository): Response
     {
+        if(is_numeric($url)){
+            $page = $pageRepository->find((int)$url);
+        }else{
+            $page = $pageRepository->findOneByUrl($url);
+        }
+
         $form = $this->createForm(PageType::class, $page);
         $form->handleRequest($request);
 

@@ -17,14 +17,6 @@ class GalerieType extends AbstractType
         $builder
             ->add('nom')
             ->add('description')
-            ->add('page', EntityType::class, [
-                'class' => Page::class,
-                'choice_label' => 'id',
-            ])
-            ->add('user', EntityType::class, [
-                'class' => User::class,
-                'choice_label' => 'id',
-            ])
         ;
     }
 

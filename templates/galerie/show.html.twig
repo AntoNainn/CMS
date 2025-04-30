@@ -2,7 +2,7 @@
 
 {% block title %}Galerie{% endblock %}
 
-{% block body %}
+{% block main %}
     <h1>Galerie</h1>
 
     <table class="table">
@@ -14,6 +14,12 @@
             <tr>
                 <th>Nom</th>
                 <td>{{ galerie.nom }}</td>
+            </tr>
+            <tr>
+                <th>image</th>
+                {% for image in galerie.images %}
+                    <td><img src="data:image/jpeg;base64,{{ image.path }}" alt="Image" style="max-width: 300px;"></td>
+                {% endfor %}
             </tr>
             <tr>
                 <th>Description</th>

@@ -57,9 +57,14 @@
                         <div class="flex items-center">
                             <img src="{{ asset('image/avatar.png') }}" alt="logo" width="50px">
                             <p>{{ com.user }} {{ com.dateCreation ? com.dateCreation|date('Y-m-d H:i:s') : '' }}</p>
+                            <p class="inline-block bg-gray-200 rounded-full px-3 py-1 text-xs font-semibold text-gray-700 mr-2 ml-2">{{ com.user.roles[0] }}<p>
                         </div>
                         <div class="text-gray-700 text-base">
                             {{ com.contenu|raw }}
+                        </div>
+                        <div class="flex mt-2">
+                            <i class="fa-solid fa-thumbs-up pr-4"></i>
+                            <i class="fa-solid fa-thumbs-down"></i>
                         </div>
                     </div>
                     {% if com.statut == false %}

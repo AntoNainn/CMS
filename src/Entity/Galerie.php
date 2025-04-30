@@ -21,9 +21,6 @@ class Galerie
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $description = null;
 
-    #[ORM\OneToOne(cascade: ['persist', 'remove'])]
-    private ?Page $page = null;
-
     #[ORM\ManyToOne(inversedBy: 'galeries')]
     #[ORM\JoinColumn(nullable: false)]
     private ?User $user = null;
@@ -64,18 +61,6 @@ class Galerie
     public function setDescription(?string $description): static
     {
         $this->description = $description;
-
-        return $this;
-    }
-
-    public function getPage(): ?Page
-    {
-        return $this->page;
-    }
-
-    public function setPage(?Page $page): static
-    {
-        $this->page = $page;
 
         return $this;
     }

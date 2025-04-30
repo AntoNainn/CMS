@@ -13,7 +13,11 @@
             <p>{{ page.url }}</p>
         </div>
         <div class="px-6 pt-4 pb-2">
-            <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2"><a href="{{ path('app_page_show', {'url': page.url}) }}">show</a></span>
+            <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2"><a href="{{ path('app_page_show', {'url': page.url ?? page.id}) }}">show</a></span>
+            {% if page.user.id == app.user.id %}
+                <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2"><a href="{{ path('app_page_edit', {'url': page.url ?? page.id}) }}">edit</a></span>
+                                <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2"><a href="{{ path('app_page_delete', {'id': page.id}) }}">delete</a></span>
+            {% endif %}
             {# <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2"><a href="{{ path('app_page_edit', {'id': page.id}) }}">edit</a></span> #}
         </div>
     </div>

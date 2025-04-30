@@ -1,0 +1,34 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Image{% endblock %}
+
+{% block main %}
+    <h1>Image</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ image.id }}</td>
+            </tr>
+            <tr>
+                <th>Image</th>
+                {% for image in image.path %}
+                    <th><img src="data:image/jpeg;base64,{{ image.path }}" alt="Image" style="max-width: 300px;"></th>
+                {% else %}
+                    <th>Aucune image disponible</th>
+                {% endif %}
+            </tr>
+            <tr>
+                <th>Legende</th>
+                <td>{{ image.legende }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_image_index') }}">back to list</a>
+
+    <a href="{{ path('app_image_edit', {'id': image.id}) }}">edit</a>
+
+    {{ include('image/_delete_form.html.twig') }}
+{% endblock %}
